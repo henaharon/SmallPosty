@@ -1,57 +1,52 @@
 import React, { Component } from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
-import {
-  StatusBar,
-} from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { StatusBar } from 'react-native';
+import { inject, observer, Provider as MobxProvider } from 'mobx-react';
 import { Base } from '../../components/ui/Base';
 import { Logo } from './components/Logo';
 import { VerticalSpace } from '../../components/ui/VerticalSpace';
 import { LoginArea } from './components/LoginArea';
+import { EmailTextInput } from '../../components/ui/EmailTextInput';
+import { PasswordTextInput } from '../../components/ui/PasswordTextInput';
+import { SignInButton } from './components/SignInButton';
+import { JoinButton } from './components/JoinButton';
+import { StoreLoginScreen } from './store';
+import { ErrorMsg } from '../../components/ui/errorMsg';
 
-
+@inject('rootStore')@observer
 export class LoginScreen extends Component {
-//   componentDidMount() {
-//     this._bootstrapAsync();
-//   }
+  constructor(props) {
+    super(props);
+    this.storeLoginScreen = new StoreLoginScreen(props.rootStore);
+  }
 
-//   // Fetch the token from storage then navigate to our appropriate place
-//   _bootstrapAsync = async () => {
-//     const userToken = await AsyncStorage.getItem('userToken');
+  onChangeEmailText = text => {
+    this.storeLoginScreen.setEmail(text);
+  }
 
-//     // This will switch to the App screen or Auth screen and this loading
-//     // screen will be unmounted and thrown away.
-//     this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-//   };
+  onChangePaswordText = text => {
+    this.storeLoginScreen.setPassword(text);
 
-  // Render any loading content that you like here
+  }
   render() {
     return (
+      <MobxProvider storeLoginScreen={this.storeLoginScreen}>
       <Base color={'#00adb5'}>
-        {/* <ActivityIndicator /> */}
         <StatusBar barStyle="default" />
         <LoginArea>
-        <VerticalSpace height={45} />
-
-        <Logo />
-        <VerticalSpace height={45} />
-        <TextInput style={{height: 51}} label='Email' />
-        <VerticalSpace height={20} />
-        <TextInput style={{height: 51}} label='Password' />
-        <VerticalSpace height={30} />
-        <Button color={'black'} mode="contained" onPress={() => console.log('Pressed')}>
-    Sign In
-  </Button>
-  <VerticalSpace height={15} />
-
-  <Button color={'white'} mode="contained" onPress={() => {this.props.navigation.navigate('Register');}}>
-    Join
-  </Button>
+          <VerticalSpace height={45} />
+          <Logo />
+          <VerticalSpace height={45} />
+          <EmailTextInput store={this.storeLoginScreen} />
+          <VerticalSpace height={20} />
+          <PasswordTextInput store={this.storeLoginScreen} />
+          <ErrorMsg height={50} store={this.storeLoginScreen} />
+          <SignInButton navigation={this.props.navigation} />
+          <VerticalSpace height={15} />
+          <JoinButton navigation={this.props.navigation} />
         </LoginArea>
-        
       </Base>
+      </MobxProvider>
+
     );
   }
 }
-
-// create general input
