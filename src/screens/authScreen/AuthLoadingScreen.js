@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
-  ActivityIndicator,
   StatusBar
 } from 'react-native';
 import { Base } from '../../components/ui/Base';
@@ -12,8 +11,13 @@ export class AuthLoadingScreen extends Component {
     this._bootstrapAsync();
   }
   _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+    let token = null;
+    const userInfoString = await AsyncStorage.getItem('userInfo');
+    const userInfo = JSON.parse(userInfoString);    
+    if(userInfo){
+      token = userInfo.token;
+    }
+    this.props.navigation.navigate(token ? 'App' : 'Auth');
   };
 
   render() {
