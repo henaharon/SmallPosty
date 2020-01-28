@@ -22,7 +22,7 @@ const theme = {
 class Application extends Component {
     render() {
       return (
-        <Provider store={mainStore}>
+        <Provider rootStore={mainStore}>
           <PaperProvider theme={theme}>
             <App />
           </PaperProvider>
