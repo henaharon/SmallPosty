@@ -1,48 +1,43 @@
 import React, { Component } from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
-import {
-  ActivityIndicator,
-  StatusBar,
-  StyleSheet,
-  View,
-  Text
-} from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { inject, observer, Provider as MobxProvider } from 'mobx-react';
+import { StatusBar } from 'react-native';
 import { Base } from '../../components/ui/Base';
 import { VerticalSpace } from '../../components/ui/VerticalSpace';
 import { RegisterArea } from './components/RegisterArea';
+import { EmailTextInput } from '../../components/ui/EmailTextInput';
+import { PasswordTextInput } from '../../components/ui/PasswordTextInput';
+import { RegisterButton } from './components/RegisterButton';
+import { StoreRegisterScreen } from './store/index';
+import { ErrorMsg } from '../../components/ui/errorMsg';
 
+@inject('rootStore')@observer
 export class RegisterScreen extends Component {
-//   componentDidMount() {
-//     this._bootstrapAsync();
-//   }
+  constructor(props) {
+    super(props);
+    this.storeRegisterScreen = new StoreRegisterScreen(props.rootStore);
+  }
+  onChangeEmailText = text => {
+    this.storeRegisterScreen.setEmail(text);
+  }
 
-//   // Fetch the token from storage then navigate to our appropriate place
-//   _bootstrapAsync = async () => {
-//     const userToken = await AsyncStorage.getItem('userToken');
+  onChangePaswordText = text => {
+    this.storeRegisterScreen.setPassword(text);
 
-//     // This will switch to the App screen or Auth screen and this loading
-//     // screen will be unmounted and thrown away.
-//     this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-//   };
-
-// onPress for buttens - > pass to component //
+  }
 render() {
     return (
+      <MobxProvider storeRegisterScreen={this.storeRegisterScreen}>
       <Base color={'#00adb5'}>
-        {/* <ActivityIndicator /> */}
         <StatusBar barStyle="default" />
         <RegisterArea>
-        <TextInput style={{height: 51}} label='Email' />
-        <VerticalSpace height={20} />
-        <TextInput style={{height: 51}} label='Password' />
-        <VerticalSpace height={30} />
-        <Button color={'black'} mode="contained" onPress={() => console.log('Pressed')}>
-    Register
-  </Button>
+          <EmailTextInput store={this.storeRegisterScreen} />
+          <VerticalSpace height={20} />
+          <PasswordTextInput store={this.storeRegisterScreen} />
+          <ErrorMsg height={50} store={this.storeRegisterScreen} />
+          <RegisterButton navigation={this.props.navigation} onPress={null}/>
         </RegisterArea>
-        
       </Base>
+      </MobxProvider>
     );
   }
 }
