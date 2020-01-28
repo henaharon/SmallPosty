@@ -23,10 +23,10 @@ const MainNavigator = createMaterialBottomTabNavigator(
     DashboardScreen: { screen: DashboardScreen }
 },
 {
-initialRouteName: 'DashboardScreen',
-activeColor: '#f0edf6',
-inactiveColor: '#3e2465',
-barStyle: { backgroundColor: '#e5726d' }
+    initialRouteName: 'DashboardScreen',
+    activeColor: '#f0edf6',
+    inactiveColor: '#3e2465',
+    barStyle: { backgroundColor: '#e5726d' }
 },
 {
 headerLayoutPreset: 'center'
@@ -44,9 +44,12 @@ const AuthStack = createStackNavigator(
           screen: RegisterScreen ,
           navigationOptions: {
             headerShown: true,
-            headerTitle: 'Join',
+            headerTitle: 'JOIN',
             headerStyle: {
-              height: 40,
+              height: 40
+            },
+            headerTitleStyle: {
+              fontSize: 15
             },
             headerTitleAlign: 'center'
         },
