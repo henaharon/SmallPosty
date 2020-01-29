@@ -11,14 +11,18 @@ import { RegisterScreen } from './src/screens/registerScreen/RegisterScreen';
 
 const MainNavigator = createMaterialBottomTabNavigator(
 {
-    ProfileScreen: { screen: ProfileScreen },
-    DashboardScreen: { screen: DashboardScreen }
+    ProfileScreen: { 
+      screen: ProfileScreen,
+  },
+    DashboardScreen: { 
+      screen: DashboardScreen, 
+  },
 },
 {
     initialRouteName: 'DashboardScreen',
-    activeColor: '#f0edf6',
-    inactiveColor: '#3e2465',
-    barStyle: { backgroundColor: '#e5726d' }
+    activeColor: 'white',
+    inactiveColor: '#00adb5',
+    barStyle: { backgroundColor: '#00adb5' }
 },
 {
 headerLayoutPreset: 'center'
