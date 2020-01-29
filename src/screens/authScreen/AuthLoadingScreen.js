@@ -5,17 +5,20 @@ import {
 } from 'react-native';
 import { Base } from '../../components/ui/Base';
 import { Logo } from '../loginScreen/components/Logo';
+import { inject, observer } from 'mobx-react';
 
+@inject('rootStore')@observer
 export class AuthLoadingScreen extends Component {
   componentDidMount() {
-    this._bootstrapAsync();
+    this.checkForToken();
   }
-  _bootstrapAsync = async () => {
+  checkForToken = async () => {
     let token = null;
     const userInfoString = await AsyncStorage.getItem('userInfo');
     const userInfo = JSON.parse(userInfoString);    
     if(userInfo){
       token = userInfo.token;
+      this.props.rootStore.setUserInfo(userInfo);
     }
     this.props.navigation.navigate(token ? 'App' : 'Auth');
   };
