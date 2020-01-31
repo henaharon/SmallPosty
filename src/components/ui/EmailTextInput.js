@@ -3,10 +3,13 @@ import { StyleSheet } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 export class EmailTextInput extends PureComponent {
-    render(){
+    onChaneEmail = text => {
         const { store } = this.props;
+        store.setEmail(text)
+    }
+    render(){
         return(
-            <TextInput style={styles.textInput} label='Email' onChangeText={text => store.setEmail(text)} />
+            <TextInput style={styles.textInput} label='Email' onChangeText={this.onChaneEmail} />
         );
     }
 }
