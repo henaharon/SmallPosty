@@ -1,26 +1,34 @@
 import React from 'react';
-import {
-    View,
-    StyleSheet,
-    Text,
-  } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/Entypo'
 
-export const Header = () => (   <HeaderComponent>
-  <HeaderText>
-  DashboardScreen
-  </HeaderText>
-</HeaderComponent>);
+export const Header = props => (
+  <HeaderView>
+    <TouchableOpacity onPress={() => props.navigation.navigate('AddPost')}>
+      <Icon style={styles.plus} name="plus" size={30} color="white" />
+    </TouchableOpacity> 
+    <Image style={styles.logo} source={require('../../../images/logo_colored.png')} />
+  </HeaderView>
+  );
 
+  const styles = StyleSheet.create({
+    logo: {
+        width: 80, 
+        height: 45,
+        marginLeft: '25%' 
+    },
+    plus: {
+      paddingRight: 15
+    }
+  });
 
-const HeaderComponent = styled(View)`
-  height: 100;
-  justify-content: flex-start;
-  align-self: flex-start;
-  margin-top: 20px;
-  margin-left: 20px;
+const HeaderView = styled(View)`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  background-color: #00adb5;
+  margin-top: 0.1px;
+  elevation: 3;
 `;
 
-const HeaderText = styled(Text)`
-color: black;
-`;
