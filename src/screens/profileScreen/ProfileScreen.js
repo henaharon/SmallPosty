@@ -16,7 +16,7 @@ export class ProfileScreen extends Component {
   constructor(props) {
     super(props);
     this.storeProfileScreen = new StoreProfileScreen(props.rootStore);
-    this.state = { listDisplayed: new Animated.Value(-width * 2) }
+    this.state = { listDisplayed: new Animated.Value(0) }
   }
     async componentDidMount() {
       await this.storeProfileScreen.getMyPosts();
@@ -47,9 +47,9 @@ export class ProfileScreen extends Component {
             <Header text={userEmail} navigation={this.props.navigation} />
             <TabBarNav listController={this.listController} />
             <Animated.View style={{ flex: 1, flexDirection: 'row', left: this.state.listDisplayed }}>
-              <FollowersList />
-              <FollowingList />
               <GridPostsView />
+              <FollowingList />
+              <FollowersList />
             </Animated.View>          
           </Base>
         </MobxProvider>
