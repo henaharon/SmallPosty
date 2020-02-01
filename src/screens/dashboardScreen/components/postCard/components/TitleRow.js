@@ -4,14 +4,15 @@ import Icon from 'react-native-vector-icons/Foundation'
 
 export const TitleRow = props => (
         <View style={styles.titleRow}>
+            <View style={styles.titleView}>
+                <Text style={styles.title}>{props.title}</Text>
+            </View>
             {props.isMyPost ?   <TouchableOpacity onPress={props.onPress}>
                                     <Icon style={styles.delete} name="page-delete" size={25} color="#7f7f7d" />
                                 </TouchableOpacity> 
                                 : 
                                 <View style={styles.smallView} />}
-            <View style={styles.titleView}>
-                <Text style={styles.title}>{props.title}</Text>
-            </View>
+            
         </View>
   );
 

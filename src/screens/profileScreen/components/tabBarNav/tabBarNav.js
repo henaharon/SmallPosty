@@ -8,9 +8,9 @@ export class TabBarNav extends Component {
     render(){
         return (
             <View style={styles.tabBar}>
-                <TabBarButton tabNum={1} tabTitle={'Followers'} listController={this.props.listController} />
+                <TabBarButton icon tabNum={1} tabTitle={'Posts'} listController={this.props.listController} />
                 <TabBarButton tabNum={2} tabTitle={'Following'} listController={this.props.listController} />
-                <TabBarButton icon tabNum={3} tabTitle={'Posts'} listController={this.props.listController} />
+                <TabBarButton tabNum={3} tabTitle={'Followers'} listController={this.props.listController} />
             </View>
         )
     }

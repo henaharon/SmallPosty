@@ -5,15 +5,15 @@ import Icon from 'react-native-vector-icons/AntDesign'
 
 export const EmailCard = props => (
                 <CardView>
-                    <Text style={styles.email}>{props.post.item.email}</Text>
                     <Icon name="idcard" size={25} color="#7f7f7d" />
+                    <Text style={styles.email}>{props.post.item.email}</Text>
                 </CardView>
             );
 
   const styles = StyleSheet.create({
     email: {
         color: 'black',
-        marginRight: 10,
+        marginLeft: 10,
         color: '#7f7f7d'
     },
 
@@ -24,9 +24,9 @@ const CardView = styled(View)`
   height: 40px;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   background-color: white;
-  padding-right: 10px;
+  padding-Left: 10px;
   margin-vertical: 1.5px;
   elevation: 1;
 `;

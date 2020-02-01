@@ -5,10 +5,11 @@ import Icon from 'react-native-vector-icons/Entypo'
 
 export const Header = props => (
   <HeaderView>
-    <TouchableOpacity onPress={() => props.navigation.navigate('AddPost')}>
-      <Icon style={styles.plus} name="plus" size={30} color="white" />
-    </TouchableOpacity> 
+    <View style={styles.fill} />
     <Image style={styles.logo} source={require('../../../images/logo_colored.png')} />
+    <TouchableOpacity onPress={() => props.navigation.navigate('AddPost')}>
+      <Icon name="plus" size={30} color="white" />
+    </TouchableOpacity> 
   </HeaderView>
   );
 
@@ -16,10 +17,9 @@ export const Header = props => (
     logo: {
         width: 80, 
         height: 45,
-        marginLeft: '25%' 
     },
-    plus: {
-      paddingRight: 15
+    fill: {
+      width: 30, 
     }
   });
 
@@ -31,5 +31,8 @@ const HeaderView = styled(View)`
   background-color: #00adb5;
   margin-top: 0.1px;
   elevation: 3;
+  justify-content: space-between;
+  padding-right: 15px;
+  padding-left: 15px;
 `;
 

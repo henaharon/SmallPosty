@@ -5,17 +5,16 @@ import Icon from 'react-native-vector-icons/Feather'
 
 export const Header = props => (
                 <HeaderView>
-                    <Text style={styles.email}>{props.text}</Text>
                     <View style={styles.iconView}>
                       <Image style={styles.icon} source={require('../../../images/artwork.png')}/>
                     </View>
+                    <Text style={styles.email}>{props.text}</Text>
                 </HeaderView>
             );
 
   const styles = StyleSheet.create({
     email: {
         color: 'white',
-        fontFamily: "Times New Roman"
     },
     icon: {
       height: 20,
@@ -23,10 +22,10 @@ export const Header = props => (
     },
     iconView: {
       borderColor: 'white',
-      borderWidth: 0.3,
+      borderWidth: 0.5,
       paddingVertical: 5,
       paddingHorizontal: 10,
-      marginLeft: 10
+      marginRight: 10
     }
 
   });
