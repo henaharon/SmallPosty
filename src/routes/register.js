@@ -1,8 +1,6 @@
 
 import { consts } from '../consts';
 export async function registerRequest(data) {    
-    console.log("data", data);
-    
     const response = await fetch(`${consts.API}api/usr/register`, {
       method: 'POST',
       headers: {

@@ -23,16 +23,13 @@ export async function addPost(userToken ,data) {
     return await response.json();
   }
 
-  export async function getPostById(data) {    
-    console.log("data", data);
-    
+  export async function getPostById(userToken,userId) {        
     const response = await fetch(`${consts.API}api/post/get-posts-by-user-id`, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `${userToken}`
-      },
-      body: JSON.stringify(data)
+      }
     });    
     return await response.json();
   }
