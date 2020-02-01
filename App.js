@@ -62,7 +62,6 @@ const MainNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: ({tintColor}) => <Icon name="clipboard" size={25} color={tintColor} /> ,
       } 
   },
-  headerLayoutPreset: 'center'
 },
 {
     initialRouteName: 'DashboardScreen',
@@ -71,6 +70,9 @@ const MainNavigator = createMaterialBottomTabNavigator(
     barStyle: { backgroundColor: '#fdffff' },
     shifting: true,
 },
+{
+  headerLayoutPreset: 'center'
+}
 )
 
 const AuthStack = createStackNavigator(
