@@ -10,7 +10,7 @@ export class StoreProfileScreen {
   @observable myPostsArray = [];
   @observable followingArray = [];
   @observable followersArray = [];
-  @observable tabNumSelected = 3;
+  @observable tabNumSelected = 1;
 
 
 
