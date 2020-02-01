@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button, Divider } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import {  Divider } from 'react-native-paper';
 import { inject, observer } from 'mobx-react';
 import { SortListButton } from './components/sortListButton';
 
@@ -18,6 +18,9 @@ export class SortMenu extends Component {
   onPressUnfollowed = () => {
     this.props.storeDashboardScreen.sortByUnfollowed();
   }
+  onPressMyPosts = () => {
+    this.props.storeDashboardScreen.sortByMyPosts();
+  }
 
   render() {
     return (
@@ -30,6 +33,8 @@ export class SortMenu extends Component {
                 <SortListButton onPress={this.onPressFollowed} text={'Followed'} />
                 <Divider style={styles.dividor} />
                 <SortListButton onPress={this.onPressUnfollowed} text={'Unfollowed'} />
+                <Divider style={styles.dividor} />
+                <SortListButton onPress={this.onPressMyPosts} text={'My Posts'} />
         </View>
     );
   }
@@ -37,7 +42,7 @@ export class SortMenu extends Component {
 
 const styles = StyleSheet.create({
     menuView: {
-        width: '100%'
+        width: '100%',
     },
     dividor: {
         alignSelf: 'center',
