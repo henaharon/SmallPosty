@@ -48,13 +48,7 @@ DashboardScreenStack.navigationOptions = ({ navigation }) => {
 
 const MainNavigator = createMaterialBottomTabNavigator(
 {
-    ProfileScreen: { 
-      screen: ProfileScreen,
-      navigationOptions: {
-        tabBarLabel: 'Profile',
-        tabBarIcon: ({tintColor}) => <Icon name="user" size={25} color={tintColor} /> 
-      }
-  },
+
     DashboardScreen: { 
       screen: DashboardScreenStack,
       navigationOptions: {
@@ -62,6 +56,13 @@ const MainNavigator = createMaterialBottomTabNavigator(
         tabBarIcon: ({tintColor}) => <Icon name="clipboard" size={25} color={tintColor} /> ,
       } 
   },
+  ProfileScreen: { 
+    screen: ProfileScreen,
+    navigationOptions: {
+      tabBarLabel: 'Profile',
+      tabBarIcon: ({tintColor}) => <Icon name="user" size={25} color={tintColor} /> 
+    }
+}
 },
 {
     initialRouteName: 'DashboardScreen',
