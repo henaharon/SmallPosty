@@ -58,7 +58,6 @@ export class StoreDashboardScreen {
       const response = yield getAllPost(this.rootStore.userToken);
       if(response.res){
         const postsFromServer = response.data;
-        console.log("TCL: getAllPosts -> response.data", response.data)
         this.postsArray = postsFromServer.sort((a,b) => {
           return new Date(b.created_at) - new Date(a.created_at);
         });
