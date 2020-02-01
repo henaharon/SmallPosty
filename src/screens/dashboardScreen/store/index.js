@@ -1,7 +1,7 @@
 import { observable, action, flow } from 'mobx';
 import { getAllPost, deletePostByID } from '../../../routes/post';
 import { getFollowersById, addFollower } from '../../../routes/follower';
-import { NEWEST, OLDEST, FOLLOWED, UNFOLLOWED } from './sortMethodConsts';
+import { NEWEST, OLDEST, FOLLOWED, UNFOLLOWED, MY_POSTS } from './sortMethodConsts';
 export class StoreDashboardScreen {
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -112,10 +112,22 @@ export class StoreDashboardScreen {
   }
 
   @action
+  sortByMyPosts(){
+    this.sortMethod = MY_POSTS;
+    this.isSortMenuOpen = false;
+    let postsArrayCopy = this.postsArray.slice();
+    let myUserIdArray = [this.rootStore.userId];
+    const sortedPosts = postsArrayCopy.sort(function(a, b){  
+      return myUserIdArray.indexOf(b.user_id) - myUserIdArray.indexOf(a.user_id);
+    });
+    this.postsArray = sortedPosts;
+  }
+
+  @action
   deletePost = flow(function*(post_id) {
     try{
       yield deletePostByID(this.rootStore.userToken, post_id);
-      const postsArrayAfterRemovePost = this.postsArray.slice().filter(obj => obj.user_id != this.rootStore.userId);
+      const postsArrayAfterRemovePost = this.postsArray.slice().filter(obj => obj.post_id != post_id);
       this.postsArray = postsArrayAfterRemovePost;
     }
     catch(e){
