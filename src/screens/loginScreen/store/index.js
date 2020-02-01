@@ -1,4 +1,4 @@
-import { observable, action, flow } from 'mobx';
+import { observable, action, flow, computed } from 'mobx';
 import AsyncStorage from '@react-native-community/async-storage';
 import { loginRequest } from '../../../routes/login';
 import { validateEmail } from './logic/validateEmail';
@@ -11,6 +11,7 @@ export class StoreLoginScreen {
   @observable email;
   @observable password;
   @observable errorMsg = null;
+  @observable loading;
 
 
   @action
@@ -37,9 +38,12 @@ export class StoreLoginScreen {
                     if(!response.res){
                         this.errorMsg = response.msg;
               }
-                    if(response.res){
+                    if(response.res && response.data){
+                        this.rootStore.isLoading = true;    
+                        navigation.navigate('Loading')                    
                         yield AsyncStorage.setItem('userInfo', JSON.stringify(response.data));
-                        navigation.navigate('App')
+                        this.rootStore.setUserInfo(response.data);
+                        this.rootStore.isLoading = false;    
                     }
                 }
                 else {
@@ -47,6 +51,7 @@ export class StoreLoginScreen {
                 }
               
             }
+
       }
     catch (e) {
             console.log("catch", e);
