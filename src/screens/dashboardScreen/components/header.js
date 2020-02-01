@@ -25,6 +25,7 @@ export const Header = props => (
 
 const HeaderView = styled(View)`
   width: 100%;
+  height: 50px;
   flex-direction: row;
   align-items: center;
   background-color: #00adb5;

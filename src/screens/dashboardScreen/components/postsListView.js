@@ -9,8 +9,8 @@ export class PostsListView extends PureComponent {
         const { postsArray } = this.props.storeDashboardScreen;
         return (
             <SafeAreaView style={styles.flexView}>
-                    <FlatList  data={postsArray}
-                            keyExtractor={(item, index) => item.post_id.toString()} 
+                    <FlatList  data={postsArray.slice()}
+                            keyExtractor={item => item.post_id.toString()} 
                             renderItem={(item) => <PostCard post={item} />} 
                             />
             </SafeAreaView>
