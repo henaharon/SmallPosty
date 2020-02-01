@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Button, Divider } from 'react-native-paper';
 import { inject, observer } from 'mobx-react';
+import { SortListButton } from './components/sortListButton';
 
 @inject('storeDashboardScreen')@observer
 export class SortMenu extends Component {
@@ -22,29 +23,13 @@ export class SortMenu extends Component {
     return (
         <View style={styles.menuView}>
                 <Divider style={styles.filterDividor} />
-                <Button contentStyle={styles.button} onPress={this.onPressNewest}>
-                    <Text style={styles.buttonText}>
-                        Newest
-                    </Text>
-                </Button>
+                <SortListButton onPress={this.onPressNewest} text={'Newest'} />
                 <Divider style={styles.dividor} />
-                <Button contentStyle={styles.button} onPress={this.onPressOldest}>
-                    <Text style={styles.buttonText}>
-                        Oldest
-                    </Text>
-                </Button>
+                <SortListButton onPress={this.onPressOldest} text={'Oldest'} />
                 <Divider style={styles.dividor} />
-                <Button contentStyle={styles.button} onPress={this.onPressFollowed}>
-                    <Text style={styles.buttonText}>
-                        Followed
-                    </Text>
-                </Button>
+                <SortListButton onPress={this.onPressFollowed} text={'Followed'} />
                 <Divider style={styles.dividor} />
-                <Button contentStyle={styles.button} onPress={this.onPressUnfollowed}>
-                    <Text style={styles.buttonText}>
-                        Unfollowed
-                    </Text>
-                </Button>
+                <SortListButton onPress={this.onPressUnfollowed} text={'Unfollowed'} />
         </View>
     );
   }
@@ -53,9 +38,6 @@ export class SortMenu extends Component {
 const styles = StyleSheet.create({
     menuView: {
         width: '100%'
-    },
-    buttonText: {
-        fontSize:12,
     },
     dividor: {
         alignSelf: 'center',
