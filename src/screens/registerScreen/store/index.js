@@ -25,7 +25,7 @@ export class StoreRegisterScreen {
   
   @action
   joinPressed = flow(function*(navigation) {
-      let loginData = { email:this.email, password:this.password };
+      let registerData = { email:this.email, password:this.password };
       try {
           if(!this.email || !this.password) {
               this.errorMsg = 'Empty Fields.';
@@ -33,13 +33,12 @@ export class StoreRegisterScreen {
             if(this.email && validateEmail(this.email))
             {
                 if(this.password && this.password.length >= 8) {
-                    const response = yield registerRequest(loginData);
+                    const response = yield registerRequest(registerData);
                     if(!response.res){
                         this.errorMsg = response.msg;
               }
-                    if(response.res){
-                        yield AsyncStorage.setItem('userInfo', JSON.stringify(response.data));
-                        navigation.navigate('App')
+                    if(response.res && response.data){
+                        navigation.navigate('Login');  
                     }
                 }
                 else {
