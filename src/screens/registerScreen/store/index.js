@@ -2,6 +2,7 @@ import { observable, action, flow } from 'mobx';
 import AsyncStorage from '@react-native-community/async-storage';
 import { registerRequest } from '../../../routes/register';
 import { validateEmail } from '../../loginScreen/store/logic/validateEmail';
+import { loginRequest } from '../../../routes/login';
 
 export class StoreRegisterScreen {
   constructor(rootStore) {
@@ -38,7 +39,17 @@ export class StoreRegisterScreen {
                         this.errorMsg = response.msg;
               }
                     if(response.res && response.data){
-                        navigation.navigate('Login');  
+                      const response = yield loginRequest(registerData);
+                      if(!response.res){
+                          this.errorMsg = response.msg;
+                }
+                      if(response.res && response.data){
+                          this.rootStore.isLoading = true;    
+                          navigation.navigate('Loading')                    
+                          yield AsyncStorage.setItem('userInfo', JSON.stringify(response.data));
+                          this.rootStore.setUserInfo(response.data);
+                          this.rootStore.isLoading = false;    
+                      }
                     }
                 }
                 else {
